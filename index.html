@@ -106,19 +106,29 @@
     </form>
 
     <p class="foot" id="status"></p>
+    <div id="embed-holder" style="margin-top: 14px;"></div>
   </div>
 
   <script>
     function handleScratchLink() {
       const input = document.getElementById('scratch-link-input');
       const status = document.getElementById('status');
+      const embedHolder = document.getElementById('embed-holder');
       const link = input.value.trim();
       if (!link) return;
 
-      // TODO: hook this up to wherever links should actually go (e.g. an API call)
-      console.log('Scratch link submitted:', link);
+      var match = link.match(/scratch\.mit\.edu\/projects\/(\d+)/);
 
-      status.textContent = 'saved - we will look at it once we are back.';
+      if (!match) {
+        status.textContent = 'that does not look like a scratch project link.';
+        return;
+      }
+
+      var projectId = match[1];
+
+      embedHolder.innerHTML = '<iframe src="https://scratch.mit.edu/projects/' + projectId + '/embed" width="100%" height="280" frameborder="0" allowtransparency="true"></iframe>';
+
+      status.textContent = 'showing project ' + projectId;
       input.value = '';
     }
   </script>
