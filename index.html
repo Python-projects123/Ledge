@@ -128,7 +128,17 @@
 
       var embedUrl = 'https://turbowarp.org/' + projectId + '/embed?fps=60&limitless';
 
-      embedHolder.innerHTML = '<iframe src="' + embedUrl + '" width="100%" height="280" frameborder="0" allow="fullscreen" allowfullscreen></iframe>';
+      embedHolder.innerHTML = '<iframe id="tw-frame" src="' + embedUrl + '" width="100%" height="280" frameborder="0" allow="fullscreen" allowfullscreen></iframe>' +
+        '<button id="fullscreen-btn" style="margin-top: 8px; width: 100%; background: transparent; border: 1px solid #21262d; color: #8b949e; font-family: inherit; font-size: 13px; padding: 8px; cursor: pointer;">fullscreen</button>';
+
+      document.getElementById('fullscreen-btn').onclick = function () {
+        var frame = document.getElementById('tw-frame');
+        if (frame.requestFullscreen) {
+          frame.requestFullscreen();
+        } else if (frame.webkitRequestFullscreen) {
+          frame.webkitRequestFullscreen();
+        }
+      };
 
       status.textContent = 'showing project ' + projectId;
       input.value = '';
