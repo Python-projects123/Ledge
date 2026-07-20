@@ -126,7 +126,9 @@
 
       var projectId = match[1];
 
-      embedHolder.innerHTML = '<iframe src="https://scratch.mit.edu/projects/' + projectId + '/embed" width="100%" height="280" frameborder="0" allowtransparency="true"></iframe>';
+      var embedUrl = 'https://turbowarp.org/' + projectId + '/embed?fps=60&limitless';
+
+      embedHolder.innerHTML = '<iframe src="' + embedUrl + '" width="100%" height="280" frameborder="0" allow="fullscreen" allowfullscreen></iframe>';
 
       status.textContent = 'showing project ' + projectId;
       input.value = '';
